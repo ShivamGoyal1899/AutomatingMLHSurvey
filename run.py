@@ -7,32 +7,28 @@ import time
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
-    
-for i in range(0, 100):
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+
+for i in range(0, 1000):
     driver = webdriver.Chrome(executable_path=r'chromedriver.exe', chrome_options=chrome_options)
-    driver.get('https://mlh.az1.qualtrics.com/jfe/form/SV_3kIVGinpkQAETsN')
+    driver.get('https://internshala.com/fake_page?utm_source=refer_copylink&utm_medium=fake_utm')
     time.sleep(2)
 
-    driver.find_element_by_id('NextButton').click()
-    time.sleep(2)
-
-    driver.find_element_by_id('QID4-1-label').click()
+    driver.find_element_by_id('email').send_keys('fake_uname'+str(i)+'@fake_dns.fake_tld')
     time.sleep(1)
 
-    driver.find_element_by_id('NextButton').click()
-    time.sleep(2)
-
-    driver.find_element_by_id('QR~QID1').send_keys('singh'+i+'@airadio.co')
+    driver.find_element_by_id('password').send_keys('fake_pwd')
     time.sleep(1)
 
-    driver.find_element_by_id('QR~QID5').send_keys('helloindia'+i+'.com')
-    time.sleep(2)
-
-    driver.find_element_by_id('QID6-4-label').click()
+    driver.find_element_by_id('first_name').send_keys('fake_fname')
     time.sleep(1)
 
-    driver.find_element_by_id('NextButton').click()
+    driver.find_element_by_id('last_name').send_keys('fake_lname')
+    time.sleep(1)
+
+    driver.find_element_by_xpath('//*[@id="registration-form"]/button').click()
     time.sleep(5)
 
-    print('YaY! Promo Code number {} has been mailed.'.format(i))
+    print('YaY! User {} has been registered.'.format(i))
     driver.close()
